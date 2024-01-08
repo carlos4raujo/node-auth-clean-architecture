@@ -1,5 +1,5 @@
 import { envs } from "./config"
-import { MongoDatabase } from "./data"
+import sequelize from "./data/mysql/mysql-database"
 import { AppRoutes, Server } from "./presentation"
 
 (() => {
@@ -8,10 +8,7 @@ import { AppRoutes, Server } from "./presentation"
 
 async function main(){
   
-  await MongoDatabase.connect({ 
-    dbName: envs.MONGO_DB_NAME, 
-    mongoUrl: envs.MONGO_URL 
-  })
+  await sequelize.sync()
 
   new Server({ 
     port: envs.PORT,
