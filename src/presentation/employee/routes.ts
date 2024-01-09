@@ -12,7 +12,10 @@ export class EmployeeRoutes {
     
     const controller = new EmployeeController(employeeRepository)
 
+    router.get('/:employeeNumber', controller.getEmployee)
+    
     router.get('/', controller.getEmployees)
+
 
     return router
   }

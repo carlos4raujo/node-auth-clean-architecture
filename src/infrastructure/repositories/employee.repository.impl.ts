@@ -1,4 +1,4 @@
-import { EmployeeRepository, GetLocationsDto, LocationEntity, EmployeeDatasource, EmployeeEntity } from "../../domain";
+import { EmployeeRepository, EmployeeDatasource, EmployeeEntity, GetEmployeesDto, GetEmployeeDto } from "../../domain";
 
 export class EmployeeRepositoryImpl implements EmployeeRepository {
 
@@ -6,8 +6,12 @@ export class EmployeeRepositoryImpl implements EmployeeRepository {
     private readonly datasource: EmployeeDatasource
   ) { }
 
-  getEmployees(getEmployeesDto: GetLocationsDto): Promise<EmployeeEntity[]> {
+  getEmployees(getEmployeesDto: GetEmployeesDto): Promise<EmployeeEntity[]> {
     return this.datasource.getEmployees(getEmployeesDto)
+  }
+
+  getEmployee(getEmployeeDto: GetEmployeeDto): Promise<EmployeeEntity> {
+    return this.datasource.getEmployee(getEmployeeDto)
   }
 
 }

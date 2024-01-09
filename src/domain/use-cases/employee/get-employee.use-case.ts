@@ -1,4 +1,4 @@
-import { GetEmployeesDto } from "../../dtos";
+import { GetEmployeeDto } from "../../dtos";
 import { EmployeeRepository } from "../../repositories";
 
 interface Employee {
@@ -6,21 +6,21 @@ interface Employee {
   name: string,
 }
 
-interface GetEmployeesUseCase {
-  execute(getEmployeesDto: GetEmployeesDto): Promise<Employee[]>
+interface GetEmployeeUseCase {
+  execute(getEmployeeDto: GetEmployeeDto): Promise<Employee>
 }
 
-export class GetEmployees implements GetEmployeesUseCase {
+export class GetEmployee implements GetEmployeeUseCase {
 
   constructor(
     private readonly employeeRepository: EmployeeRepository,
   ) { }
 
-  async execute(getEmployeesDto: GetEmployeesDto): Promise<Employee[]> {
+  async execute(getEmployeesDto: GetEmployeeDto): Promise<Employee> {
 
-    const employees = await this.employeeRepository.getEmployees(getEmployeesDto)
+    const employee = await this.employeeRepository.getEmployee(getEmployeesDto)
 
-    return employees
+    return employee
 
   }
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { CustomError, EmployeeRepository, GetEmployees, GetEmployeesDto } from "../../domain"
+import { CustomError, EmployeeRepository, GetEmployee, GetEmployeeDto, GetEmployees, GetEmployeesDto } from "../../domain"
 
 export class EmployeeController {
 
@@ -22,6 +22,20 @@ export class EmployeeController {
     if(error) return res.status(400).json({ error })
 
     return new GetEmployees(this.employeeRepository)
+      .execute(getEmployeesDto!)
+      .then(data => res.json(data))
+      .catch(error => this.handleError(error, res))
+  }
+  
+  getEmployee = async (req: Request, res: Response) => {
+
+    const { employeeNumber } = req.params
+    
+    const [error, getEmployeesDto] = await GetEmployeeDto.getEmployee({ employeeNumber })
+    
+    if(error) return res.status(400).json({ error })
+
+    return new GetEmployee(this.employeeRepository)
       .execute(getEmployeesDto!)
       .then(data => res.json(data))
       .catch(error => this.handleError(error, res))
