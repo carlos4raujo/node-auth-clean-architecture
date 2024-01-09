@@ -6,8 +6,8 @@ export class LocationRepositoryImpl implements LocationRepository {
     private readonly datasource: LocationsDatasource
   ) { }
 
-  getLocations(registerUserDto: GetLocationsDto): Promise<LocationEntity> {
-    return this.datasource.getLocations(registerUserDto)
+  getLocations(getLocationsDto: GetLocationsDto): Promise<LocationEntity[]> {
+    return this.datasource.getLocations(getLocationsDto)
   }
 
 }

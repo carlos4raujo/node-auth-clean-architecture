@@ -1,7 +1,5 @@
-import { JwtAdapter } from "../../../config";
 import { GetLocationsDto } from "../../dtos";
-import { CustomError } from "../../errors";
-import { AuthRepository, LocationRepository } from "../../repositories";
+import { LocationRepository } from "../../repositories";
 
 interface Location {
   id: string
@@ -9,7 +7,7 @@ interface Location {
 }
 
 interface GetLocationsUseCase {
-  execute(getLocationsDto: GetLocationsDto): Promise<Location>
+  execute(getLocationsDto: GetLocationsDto): Promise<Location[]>
 }
 
 export class GetLocations implements GetLocationsUseCase {
@@ -18,7 +16,7 @@ export class GetLocations implements GetLocationsUseCase {
     private readonly locationRepository: LocationRepository,
   ) { }
 
-  async execute(getLocationsDto: GetLocationsDto): Promise<Location> {
+  async execute(getLocationsDto: GetLocationsDto): Promise<Location[]> {
 
     const locations = await this.locationRepository.getLocations(getLocationsDto)
 

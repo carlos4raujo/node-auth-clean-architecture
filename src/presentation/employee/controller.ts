@@ -1,10 +1,10 @@
 import { Request, Response } from "express"
-import { CustomError, GetLocationsDto, LocationRepository, GetLocations } from "../../domain"
+import { CustomError, EmployeeRepository, GetEmployees, GetEmployeesDto } from "../../domain"
 
-export class LocationController {
+export class EmployeeController {
 
   constructor(
-    private readonly locationRepository: LocationRepository,
+    private readonly employeeRepository: EmployeeRepository,
   ) {}
 
   private handleError = (error: unknown, res: Response) => {
@@ -15,14 +15,14 @@ export class LocationController {
     return res.status(500).json({ error: 'Internal server error' })
   }
   
-  getLocations = async (req: Request, res: Response) => {
+  getEmployees = async (req: Request, res: Response) => {
     
-    const [error, getLocationsDto] = await GetLocationsDto.getLocations()
+    const [error, getEmployeesDto] = await GetEmployeesDto.getEmployees()
     
     if(error) return res.status(400).json({ error })
 
-    return new GetLocations(this.locationRepository)
-      .execute(getLocationsDto!)
+    return new GetEmployees(this.employeeRepository)
+      .execute(getEmployeesDto!)
       .then(data => res.json(data))
       .catch(error => this.handleError(error, res))
   }
