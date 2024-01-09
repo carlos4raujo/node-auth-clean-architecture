@@ -1,20 +1,26 @@
-import { EmployeeModel } from "../../data";
-import { CustomError, EmployeeDatasource, EmployeeEntity, GetEmployeeDto, LocationEntity } from "../../domain";
+import { EmployeeModel, LocationModel, PositionModel } from "../../data";
+import { CustomError, EmployeeDatasource, EmployeeEntity, GetEmployeeDto } from "../../domain";
 import { EmployeeMapper } from "../mappers/employee.mapper";
-import { LocationMapper } from "../mappers/location.mapper";
 
 export class EmployeeDatasourceImpl implements EmployeeDatasource {
 
   async getEmployees(): Promise<EmployeeEntity[]> {
     try {
 
-      const employees = await EmployeeModel.findAll()
+      const employees = await EmployeeModel.findAll({
+        include: [{
+          model: PositionModel,
+        },
+        {
+          model: LocationModel,
+        }]
+      })
 
-      return employees.map(EmployeeMapper.employeeEntityFromObject)
+      return employees.map((EmployeeMapper.employeeEntityFromObject))
 
-    }catch(error) {
+    } catch (error) {
 
-      if(error instanceof CustomError) {
+      if (error instanceof CustomError) {
         throw error
       }
 
@@ -33,9 +39,9 @@ export class EmployeeDatasourceImpl implements EmployeeDatasource {
 
       return EmployeeMapper.employeeEntityFromObject(employee?.get({ plain: true }))
 
-    }catch(error) {
+    } catch (error) {
 
-      if(error instanceof CustomError) {
+      if (error instanceof CustomError) {
         throw error
       }
 
