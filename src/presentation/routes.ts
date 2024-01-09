@@ -3,6 +3,7 @@ import { AuthRoutes } from "./auth/routes";
 import { LocationRoutes } from "./location/routes";
 import { EmployeeRoutes } from "./employee/routes";
 import { SettingsRoutes } from "./settings/routes";
+import { DeviceRoutes } from "./device/routes";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -12,6 +13,7 @@ export class AppRoutes {
     router.use('/api/locations', LocationRoutes.routes)
     router.use('/api/employees', EmployeeRoutes.routes)
     router.use('/api/settings', SettingsRoutes.routes)
+    router.use('/api/devices', DeviceRoutes.routes)
 
     return router
   }
