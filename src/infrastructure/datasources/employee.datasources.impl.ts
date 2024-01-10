@@ -19,7 +19,6 @@ const findOptions: FindOptions = {
       ]  
     }
   ],
-  limit: 10,
 }
 
 export class EmployeeDatasourceImpl implements EmployeeDatasource {
