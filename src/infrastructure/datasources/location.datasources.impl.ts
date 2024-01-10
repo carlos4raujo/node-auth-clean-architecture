@@ -1,8 +1,8 @@
 import LocationModel from "../../data/mysql/models/location.model";
-import { CustomError, LocationEntity, LocationsDatasource } from "../../domain";
+import { CustomError, LocationEntity, LocationDatasource } from "../../domain";
 import { LocationMapper } from "../mappers/location.mapper";
 
-export class LocationDatasourceImpl implements LocationsDatasource {
+export class LocationDatasourceImpl implements LocationDatasource {
 
   async getLocations(): Promise<LocationEntity[]> {
     try {

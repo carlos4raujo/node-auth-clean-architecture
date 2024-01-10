@@ -1,9 +1,9 @@
-import { GetLocationsDto, LocationEntity, LocationRepository, LocationsDatasource } from "../../domain";
+import { GetLocationsDto, LocationEntity, LocationRepository, LocationDatasource } from "../../domain";
 
 export class LocationRepositoryImpl implements LocationRepository {
 
   constructor(
-    private readonly datasource: LocationsDatasource
+    private readonly datasource: LocationDatasource
   ) { }
 
   getLocations(getLocationsDto: GetLocationsDto): Promise<LocationEntity[]> {

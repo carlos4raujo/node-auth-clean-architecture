@@ -3,7 +3,7 @@ export * from './dtos/auth';
 export * from './dtos/device';
 export * from './dtos/employee';
 export * from './dtos';
-export * from './dtos/locations';
+export * from './dtos/location';
 export * from './dtos/responsive';
 export * from './dtos/settings';
 export * from './entities';
