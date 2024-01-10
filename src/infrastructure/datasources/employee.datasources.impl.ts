@@ -1,20 +1,33 @@
+import { FindOptions } from "sequelize";
 import { EmployeeModel, LocationModel, PositionModel } from "../../data";
 import { CustomError, EmployeeDatasource, EmployeeEntity, GetEmployeeDto } from "../../domain";
 import { EmployeeMapper } from "../mappers/employee.mapper";
+
+const findOptions: FindOptions = {
+  include: [{
+      model: PositionModel,
+    },
+    {
+      model: LocationModel,
+    },
+    {
+      model: EmployeeModel,
+      as: 'boss',
+      include: [
+        { model: PositionModel },
+        { model: LocationModel }
+      ]  
+    }
+  ],
+  limit: 10,
+}
 
 export class EmployeeDatasourceImpl implements EmployeeDatasource {
 
   async getEmployees(): Promise<EmployeeEntity[]> {
     try {
 
-      const employees = await EmployeeModel.findAll({
-        include: [{
-          model: PositionModel,
-        },
-        {
-          model: LocationModel,
-        }]
-      })
+      const employees = await EmployeeModel.findAll(findOptions)
 
       return employees.map((EmployeeMapper.employeeEntityFromObject))
 
@@ -35,9 +48,12 @@ export class EmployeeDatasourceImpl implements EmployeeDatasource {
 
       const { employeeNumber } = getEmployeeDto
 
-      const employee = await EmployeeModel.findOne({ where: { employee_number: employeeNumber } })
+      const employee = await EmployeeModel.findOne({ 
+        ...findOptions,
+        where: { employee_number: employeeNumber } 
+      }) as { [key: string]: any; }
 
-      return EmployeeMapper.employeeEntityFromObject(employee?.get({ plain: true }))
+      return EmployeeMapper.employeeEntityFromObject(employee)
 
     } catch (error) {
 

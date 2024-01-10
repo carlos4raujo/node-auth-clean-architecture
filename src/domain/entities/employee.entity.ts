@@ -7,6 +7,8 @@ export class EmployeeEntity {
     public id: string,
     public name: string,
     public email: string,
+    public employeeNumber: string,
+    public boss: EmployeeEntity,
     public location: LocationEntity,
     public position: PositionEntity,
   ) {}
