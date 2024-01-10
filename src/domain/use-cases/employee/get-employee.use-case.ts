@@ -1,10 +1,6 @@
 import { GetEmployeeDto } from "../../dtos";
+import { Employee } from "../../interfaces";
 import { EmployeeRepository } from "../../repositories";
-
-interface Employee {
-  id: string
-  name: string,
-}
 
 interface GetEmployeeUseCase {
   execute(getEmployeeDto: GetEmployeeDto): Promise<Employee>
