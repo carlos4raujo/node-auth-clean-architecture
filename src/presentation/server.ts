@@ -20,6 +20,10 @@ export class Server {
 
   async start() {
 
+    // uncomment to add 3s delay
+    // this.app.use((req, res, next) => {
+    //   setTimeout(next, 3000)
+    // })
 
     this.app.use(cors({ origin: '*' }))
     this.app.use(express.json())
