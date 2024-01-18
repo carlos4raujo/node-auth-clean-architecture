@@ -1,12 +1,17 @@
+import _ from 'lodash'
+
 import { SettingsEntity } from "../../domain";
 
 export class SettingsMapper {
 
-  static settingsEntityFromObject(object: { [key: string]: any }) {
+  static settingsEntityFromObject(settings: { [key: string]: any }[]) {
+    
+    const { referenceNumber, defaultAssigner } = settings.reduce((prev, curr) => ({ ...prev, [_.camelCase(curr.key)] : curr.value }), {})
 
-    const { key, value } = object
-
-    return new SettingsEntity(key, value)
+    return new SettingsEntity(
+      referenceNumber,
+      defaultAssigner
+    )
 
   }
 

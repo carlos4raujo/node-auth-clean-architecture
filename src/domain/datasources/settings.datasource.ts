@@ -3,6 +3,6 @@ import { GetSettingsDto } from "../dtos";
 
 export abstract class SettingsDatasource {
 
-  abstract getSettings(getSettingsDto: GetSettingsDto): Promise<SettingsEntity[]>
+  abstract getSettings(getSettingsDto: GetSettingsDto): Promise<SettingsEntity>
 
 }

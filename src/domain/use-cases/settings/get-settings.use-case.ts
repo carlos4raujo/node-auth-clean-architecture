@@ -2,12 +2,11 @@ import { GetSettingsDto } from "../../dtos";
 import { SettingsRepository } from "../../repositories";
 
 interface Settings {
-  key: string
-  value: string,
+  referenceNumber: number
 }
 
 interface GetSettingsUseCase {
-  execute(getSettingsDto: GetSettingsDto): Promise<Settings[]>
+  execute(getSettingsDto: GetSettingsDto): Promise<Settings>
 }
 
 export class GetSettings implements GetSettingsUseCase {
@@ -16,7 +15,7 @@ export class GetSettings implements GetSettingsUseCase {
     private readonly settingsRepository: SettingsRepository,
   ) { }
 
-  async execute(getSettingsDto: GetSettingsDto): Promise<Settings[]> {
+  async execute(getSettingsDto: GetSettingsDto): Promise<Settings> {
 
     const settings = await this.settingsRepository.getSettings(getSettingsDto)
 

@@ -49,7 +49,7 @@ export class EmployeeDatasourceImpl implements EmployeeDatasource {
 
       const employee = await EmployeeModel.findOne({ 
         ...findOptions,
-        where: { employee_number: employeeNumber } 
+        where: { employee_number: employeeNumber}
       }) as { [key: string]: any; }
 
       return EmployeeMapper.employeeEntityFromObject(employee)

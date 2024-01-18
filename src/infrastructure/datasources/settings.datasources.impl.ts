@@ -4,12 +4,13 @@ import { SettingsMapper } from "../mappers";
 
 export class SettingsDatasourceImpl implements SettingsDatasource {
 
-  async getSettings(): Promise<SettingsEntity[]> {
+  async getSettings(): Promise<SettingsEntity> {
     try {
 
       const settings = await SettingsModel.findAll()
+      
 
-      return settings.map(SettingsMapper.settingsEntityFromObject)
+      return SettingsMapper.settingsEntityFromObject(settings)
 
     }catch(error) {
 

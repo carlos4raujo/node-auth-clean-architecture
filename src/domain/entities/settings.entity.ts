@@ -1,8 +1,8 @@
 export class SettingsEntity {
 
   constructor(
-    public key: string,
-    public value: string,
+    public referenceNumber: number,
+    public defaultAssigner: string
   ) {}
 
 }

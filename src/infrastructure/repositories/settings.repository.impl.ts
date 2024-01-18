@@ -6,7 +6,7 @@ export class SettingsRepositoryImpl implements SettingsRepository {
     private readonly datasource: SettingsDatasource
   ) { }
 
-  getSettings(getSettingsDto: GetSettingsDto): Promise<SettingsEntity[]> {
+  getSettings(getSettingsDto: GetSettingsDto): Promise<SettingsEntity> {
     return this.datasource.getSettings(getSettingsDto)
   }
 
