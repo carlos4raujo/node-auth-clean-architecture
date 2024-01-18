@@ -1,6 +1,7 @@
 import { DataTypes, Model } from "sequelize"
 import EmployeeModel from "./employee.model"
 import LocationModel from "./location.model"
+import DeviceModel from "./device.model"
 
 import sequelize from '../mysql-database'
 
@@ -36,6 +37,14 @@ ResponsiveModel.init(
       allowNull: true,
       references: {
       model: LocationModel,
+        key: 'id',
+      },
+    },
+    device_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+      model: DeviceModel,
         key: 'id',
       },
     },
@@ -86,4 +95,8 @@ ResponsiveModel.belongsTo(EmployeeModel, {
 ResponsiveModel.belongsTo(LocationModel, {
   foreignKey: 'location_id',
   as: 'location',
+})
+ResponsiveModel.belongsTo(DeviceModel, {
+  foreignKey: 'device_id',
+  as: 'device',
 })
