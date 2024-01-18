@@ -1,4 +1,4 @@
-import { GetResponsivesDto, ResponsiveEntity, ResponsiveRepository, ResponsiveDatasource } from "../../domain";
+import { GetResponsivesDto, ResponsiveEntity, ResponsiveRepository, ResponsiveDatasource, CreateResponsiveDto } from "../../domain";
 
 export class ResponsiveRepositoryImpl implements ResponsiveRepository {
 
@@ -8,6 +8,10 @@ export class ResponsiveRepositoryImpl implements ResponsiveRepository {
 
   getResponsives(getResponsiveDto: GetResponsivesDto): Promise<ResponsiveEntity[]> {
     return this.datasource.getResponsives(getResponsiveDto)
+  }
+
+  createResponsive(createResponsiveDto: CreateResponsiveDto): Promise<ResponsiveEntity> {
+    return this.datasource.createResponsive(createResponsiveDto)
   }
 
 }

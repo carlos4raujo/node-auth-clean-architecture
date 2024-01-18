@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { CustomError, ResponsiveRepository, GetResponsivesDto, GetResponsives } from "../../domain"
+import { CustomError, ResponsiveRepository, GetResponsivesDto, GetResponsives, CreateResponsiveDto, CreateResponsive } from "../../domain"
 
 export class ResponsiveController {
 
@@ -23,6 +23,18 @@ export class ResponsiveController {
 
     return new GetResponsives(this.responsiveRepository)
       .execute(getResponsivesDto!)
+      .then(data => res.json(data))
+      .catch(error => this.handleError(error, res))
+  }
+  
+  createResponsive = async (req: Request, res: Response) => {
+    
+    const [error, createResponsiveDto] = await CreateResponsiveDto.create(req.body)
+    
+    if(error) return res.status(400).json({ error })
+
+    return new CreateResponsive(this.responsiveRepository)
+      .execute(createResponsiveDto!)
       .then(data => res.json(data))
       .catch(error => this.handleError(error, res))
   }

@@ -14,6 +14,8 @@ export class ResponsiveRoutes {
 
     router.get('/', controller.getResponsives)
 
+    router.post('/', controller.createResponsive)
+
     return router
   }
 }
